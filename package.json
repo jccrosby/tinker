@@ -1,0 +1,42 @@
+{
+  "name": "tinker",
+  "version": "0.0.1",
+  "description": "I'm just tinkering with things",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha",
+    "start": "node index.js",
+    "build": "./node_modules/.bin/babel ./public/src -d ./public/scripts && ./node_modules/.bin/webpack ./public/scripts/app.js ./public/scripts/bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jccrosby/tinker.git"
+  },
+  "author": "John Crosby <jccrosby@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/jccrosby/tinker/issues"
+  },
+  "homepage": "https://github.com/jccrosby/tinker#readme",
+  "dependencies": {
+    "express": "^4.15.2",
+    "lodash": "^4.17.4",
+    "pad-number": "0.0.4",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "request": "^2.81.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-env": "^1.4.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "chai": "^3.5.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-mocha": "^4.3.0",
+    "gulp-webpack": "^1.5.0",
+    "mocha": "^3.2.0",
+    "react-scripts": "0.9.5",
+    "webpack": "^2.4.1"
+  }
+}
