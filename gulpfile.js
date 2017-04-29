@@ -8,7 +8,7 @@ var plumber = require('gulp-plumber');
 
 
 var babelConfig = {
-    "presets": ["env", "react", "es2015"]
+    "presets": ["react", "es2015"]
 };
 
 var base = {
@@ -31,6 +31,7 @@ gulp.task('watch', () => {
     gulp.src(base.clientSrc)
         .pipe(watch(base.clientSrc))
         .pipe(plumber())
+        .pipe(babel(babelConfig))
         .pipe(webpack(webpackConfig))
         .pipe(gulp.dest(base.buildDest));
 });

@@ -13,8 +13,9 @@ module.exports = {
         loaders: [
             {
                 test: /\.jsx?/,
+                loader: 'babel-loader',
                 include: APP_SRC_DIR,
-                loader: 'babel-loader'
+                exclude: ['node_modeules']
             }, {
                 test: /\.css$/,
                 loader: "style-loader!css-loader"

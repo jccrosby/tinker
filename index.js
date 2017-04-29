@@ -1,7 +1,8 @@
-var express = require('express');
-var app = express();
-var _ = require('lodash');
-var scoreboardRoute = require('./routes/scoreboard');
+let  express = require('express');
+let  _ = require('lodash');
+let  scoreboardRoute = require('./src/server/routes/scoreboard');
+
+let app = express();
 
 app.use(express.static('public'));
 app.use('/scoreboard', scoreboardRoute);

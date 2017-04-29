@@ -1,8 +1,11 @@
-import React from '../../node_modules/react';
-import ReactDOM from '../../node_modules/react-dom';
-import '../css/styles.css'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import '../css/styles.css';
+import {User} from './user.js';
+
+let user = new User({firstName: 'John', lastName: 'Crosby'});
 
 ReactDOM.render(
-  <h1>Hello, world!</h1>,
+  <h1>Hello, {user.formatName()}!</h1>,
   document.getElementById('root')
 );

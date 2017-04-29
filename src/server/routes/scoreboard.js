@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var scoreboard = require('../lib/scoreboard');
+var scoreboard = require('../scoreboard');
 var _ = require('lodash');
 
 /**
