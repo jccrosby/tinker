@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-export class User {
+export default class User {
 
     constructor(config) {
         this.firstName = _.get(config, 'firstName', '');
