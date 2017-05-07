@@ -18,12 +18,19 @@ router.get('/:year/:month/:day', function(req, res, next) {
     if (day && month && year) {
 
         console.log('Load the schedule for ', year, month, day);
+
         scoreboard.loadSchedule(year, month, day).then((scores) => {
+
+            console.log('route::scoreboard -> data:', scores);
+
             res.locals.scores = scores;
             res.render('scoreboard');
+
         }).catch((err) => {
+
             console.log('Error', err);
             res.send('Error: ' + err.toString())
+
         });
 
     } else {

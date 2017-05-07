@@ -7,7 +7,12 @@ export default class Scoreboard extends React.Component {
     constructor(props) {
 
         super(props);
+
+        console.log('scoreboard::constructor -> props', props);
+
         this.state = {games: _.get(props, 'scores.data.games.game', [])};
+
+        console.log('scoreboard::constructor -> this.state', this.state);
 
     }
 

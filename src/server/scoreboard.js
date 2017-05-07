@@ -9,8 +9,11 @@ exports.loadSchedule = (year, month, day) => {
 
         var scheduleUrl = `http://gd2.mlb.com/components/game/mlb/year_${pad(year, 2)}/month_${pad(month, 2)}/day_${pad(day, 2)}/master_scoreboard.json`;
         var result;
-        resolve(testScores);
-        /*request(scheduleUrl, (err, response, body) => {
+        //resolve(testScores);
+
+        console.log('gettng data for: ', scheduleUrl);
+
+        request(scheduleUrl, (err, response, body) => {
 
             if (err) {
                 reject(err);
@@ -24,7 +27,7 @@ exports.loadSchedule = (year, month, day) => {
 
             resolve(result);
 
-        });*/
+        });
 
     });
 
