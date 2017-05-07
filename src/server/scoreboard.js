@@ -1,6 +1,7 @@
 let _ = require('lodash');
 let pad = require('pad-number');
 let request = require('request');
+let testScores = require('../../data/master_scoreboard-2015-07-30.json');
 
 exports.loadSchedule = (year, month, day) => {
 
@@ -8,8 +9,8 @@ exports.loadSchedule = (year, month, day) => {
 
         var scheduleUrl = `http://gd2.mlb.com/components/game/mlb/year_${pad(year, 2)}/month_${pad(month, 2)}/day_${pad(day, 2)}/master_scoreboard.json`;
         var result;
-
-        request(scheduleUrl, (err, response, body) => {
+        resolve(testScores);
+        /*request(scheduleUrl, (err, response, body) => {
 
             if (err) {
                 reject(err);
@@ -23,7 +24,7 @@ exports.loadSchedule = (year, month, day) => {
 
             resolve(result);
 
-        });
+        });*/
 
     });
 

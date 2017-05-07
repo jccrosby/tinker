@@ -1,4 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './css/styles.css';
-import Walkthrough from './samples/Walkthrough'
+import Scoreboard from './mlb/scoreboard.jsx'
+
+ReactDOM.render(<Scoreboard scores={window.scoresApp.scores}/>,
+    document.getElementById('scoresApp'));

@@ -8,7 +8,7 @@ var _ = require('lodash');
  * Master Scorebord route
  *
  */
-router.get('/:year/:month/:day', function(req, res) {
+router.get('/:year/:month/:day', function(req, res, next) {
 
     var params = req.params;
     var year = _.get(params, 'year', undefined);
@@ -19,13 +19,11 @@ router.get('/:year/:month/:day', function(req, res) {
 
         console.log('Load the schedule for ', year, month, day);
         scoreboard.loadSchedule(year, month, day).then((scores) => {
-
-            res.send(scores);
-
+            res.locals.scores = scores;
+            res.render('scoreboard');
         }).catch((err) => {
-
+            console.log('Error', err);
             res.send('Error: ' + err.toString())
-
         });
 
     } else {

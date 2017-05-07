@@ -56,11 +56,13 @@
 
 	__webpack_require__(182);
 
-	var _Walkthrough = __webpack_require__(197);
+	var _scoreboard = __webpack_require__(191);
 
-	var _Walkthrough2 = _interopRequireDefault(_Walkthrough);
+	var _scoreboard2 = _interopRequireDefault(_scoreboard);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	_reactDom2.default.render(_react2.default.createElement(_scoreboard2.default, { scores: window.scoresApp.scores }), document.getElementById('scoresApp'));
 
 /***/ }),
 /* 1 */
@@ -24323,7 +24325,85 @@
 
 
 /***/ }),
-/* 191 */,
+/* 191 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _lodash = __webpack_require__(192);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	var _game = __webpack_require__(194);
+
+	var _game2 = _interopRequireDefault(_game);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Scoreboard = function (_React$Component) {
+	    _inherits(Scoreboard, _React$Component);
+
+	    function Scoreboard(props) {
+	        _classCallCheck(this, Scoreboard);
+
+	        var _this = _possibleConstructorReturn(this, (Scoreboard.__proto__ || Object.getPrototypeOf(Scoreboard)).call(this, props));
+
+	        _this.state = { games: _lodash2.default.get(props, 'scores.data.games.game', []) };
+
+	        return _this;
+	    }
+
+	    _createClass(Scoreboard, [{
+	        key: 'getGamesList',
+	        value: function getGamesList() {
+
+	            var gamesList = this.state.games.map(function (game) {
+	                return _react2.default.createElement(
+	                    'li',
+	                    { id: game.game_pk, key: game.game_pk },
+	                    _react2.default.createElement(_game2.default, { game: game })
+	                );
+	            });
+	            return _react2.default.createElement(
+	                'ul',
+	                null,
+	                gamesList
+	            );
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'gamesList' },
+	                this.getGamesList()
+	            );
+	        }
+	    }]);
+
+	    return Scoreboard;
+	}(_react2.default.Component);
+
+	exports.default = Scoreboard;
+
+/***/ }),
 /* 192 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41446,6 +41526,14 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _lodash = __webpack_require__(192);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	var _linescore = __webpack_require__(196);
+
+	var _linescore2 = _interopRequireDefault(_linescore);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -41454,65 +41542,55 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var Clock = function (_React$Component) {
-	    _inherits(Clock, _React$Component);
+	var Game = function (_React$Component) {
+	    _inherits(Game, _React$Component);
 
-	    function Clock(props) {
-	        _classCallCheck(this, Clock);
+	    function Game(props) {
+	        _classCallCheck(this, Game);
 
-	        var _this = _possibleConstructorReturn(this, (Clock.__proto__ || Object.getPrototypeOf(Clock)).call(this, props));
+	        var _this = _possibleConstructorReturn(this, (Game.__proto__ || Object.getPrototypeOf(Game)).call(this, props));
 
-	        _this.state = { date: new Date() };
+	        _this.state = { game: props.game };
+
 	        return _this;
 	    }
 
-	    _createClass(Clock, [{
-	        key: 'componentDidMount',
-	        value: function componentDidMount() {
-	            var _this2 = this;
-
-	            this.timerId = setInterval(function () {
-	                return _this2.tick();
-	            }, 1000);
-	        }
-	    }, {
-	        key: 'componentWillUnmount',
-	        value: function componentWillUnmount() {
-	            clearInterval(this.timerId);
-	        }
-	    }, {
+	    _createClass(Game, [{
 	        key: 'render',
 	        value: function render() {
+
+	            var game = this.state.game;
+
 	            return _react2.default.createElement(
 	                'div',
-	                null,
+	                { id: 'game_' + game.game_pk, className: 'game' },
 	                _react2.default.createElement(
-	                    'h2',
-	                    null,
-	                    'It is ',
-	                    this.state.date.toLocaleTimeString(),
-	                    '.'
-	                )
+	                    'span',
+	                    { className: 'versus' },
+	                    game.away_team_name + ' @ ' + game.home_team_name
+	                ),
+	                _react2.default.createElement(
+	                    'span',
+	                    { className: 'score' },
+	                    _react2.default.createElement(_linescore2.default, { linescore: game.linescore, homeTeamName: game.home_code.toUpperCase(), awayTeamName: game.away_code.toUpperCase() })
+	                ),
+	                _react2.default.createElement('span', { className: 'pitcherWin' }),
+	                _react2.default.createElement('span', { className: 'pitcherLose' })
 	            );
-	        }
-	    }, {
-	        key: 'tick',
-	        value: function tick() {
-	            this.setState({ date: new Date() });
 	        }
 	    }]);
 
-	    return Clock;
+	    return Game;
 	}(_react2.default.Component);
 
-	exports.default = Clock;
+	exports.default = Game;
 
 /***/ }),
 /* 195 */,
 /* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -41523,206 +41601,6 @@
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var WarningBanner = function (_React$Component) {
-	    _inherits(WarningBanner, _React$Component);
-
-	    function WarningBanner(props) {
-	        _classCallCheck(this, WarningBanner);
-
-	        return _possibleConstructorReturn(this, (WarningBanner.__proto__ || Object.getPrototypeOf(WarningBanner)).call(this, props));
-	    }
-
-	    _createClass(WarningBanner, [{
-	        key: "render",
-	        value: function render() {
-	            if (this.props.warn) {
-	                return _react2.default.createElement(
-	                    "div",
-	                    { className: "warn" },
-	                    "Warning!"
-	                );
-	            } else {
-	                return null;
-	            }
-	        }
-	    }]);
-
-	    return WarningBanner;
-	}(_react2.default.Component);
-
-	exports.default = WarningBanner;
-
-/***/ }),
-/* 197 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.App = exports.NumberList = exports.ClockApp = undefined;
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactDom = __webpack_require__(36);
-
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-
-	__webpack_require__(182);
-
-	var _user = __webpack_require__(198);
-
-	var _user2 = _interopRequireDefault(_user);
-
-	var _clock = __webpack_require__(194);
-
-	var _clock2 = _interopRequireDefault(_clock);
-
-	var _warningBanner = __webpack_require__(196);
-
-	var _warningBanner2 = _interopRequireDefault(_warningBanner);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var user = new _user2.default({ firstName: 'John', lastName: 'Crosby' });
-
-	var ClockApp = exports.ClockApp = function (_React$Component) {
-	    _inherits(ClockApp, _React$Component);
-
-	    function ClockApp() {
-	        _classCallCheck(this, ClockApp);
-
-	        return _possibleConstructorReturn(this, (ClockApp.__proto__ || Object.getPrototypeOf(ClockApp)).apply(this, arguments));
-	    }
-
-	    _createClass(ClockApp, [{
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement(_clock2.default, null);
-	        }
-	    }]);
-
-	    return ClockApp;
-	}(_react2.default.Component);
-
-	var NumberList = exports.NumberList = function (_React$Component2) {
-	    _inherits(NumberList, _React$Component2);
-
-	    function NumberList(props) {
-	        _classCallCheck(this, NumberList);
-
-	        return _possibleConstructorReturn(this, (NumberList.__proto__ || Object.getPrototypeOf(NumberList)).call(this, props));
-	    }
-
-	    _createClass(NumberList, [{
-	        key: 'getListItems',
-	        value: function getListItems() {
-	            return this.props.numbers.map(function (number) {
-	                return _react2.default.createElement(
-	                    'li',
-	                    { key: number.toString() },
-	                    number
-	                );
-	            });
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement(
-	                'ul',
-	                null,
-	                this.getListItems()
-	            );
-	        }
-	    }]);
-
-	    return NumberList;
-	}(_react2.default.Component);
-
-	var App = exports.App = function (_React$Component3) {
-	    _inherits(App, _React$Component3);
-
-	    function App(props) {
-	        _classCallCheck(this, App);
-
-	        var _this3 = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
-
-	        _this3.state = { showWarning: true };
-	        _this3.handleToggleClick = _this3.handleToggleClick.bind(_this3);
-	        return _this3;
-	    }
-
-	    _createClass(App, [{
-	        key: 'handleToggleClick',
-	        value: function handleToggleClick() {
-	            this.setState(function (prevState) {
-	                return {
-	                    showWarning: !prevState.showWarning
-	                };
-	            });
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement(
-	                    'h2',
-	                    null,
-	                    'Hello ',
-	                    user.formatName(),
-	                    '!'
-	                ),
-	                _react2.default.createElement(_warningBanner2.default, { warn: this.state.showWarning }),
-	                _react2.default.createElement(
-	                    'button',
-	                    { onClick: this.handleToggleClick },
-	                    this.state.showWarning ? 'Hide' : 'Show'
-	                ),
-	                _react2.default.createElement(NumberList, { numbers: [1, 2, 3] })
-	            );
-	        }
-	    }]);
-
-	    return App;
-	}(_react2.default.Component);
-
-	_reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('app'));
-
-	_reactDom2.default.render(_react2.default.createElement(ClockApp, null), document.getElementById('clock'));
-
-/***/ }),
-/* 198 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _lodash = __webpack_require__(192);
 
@@ -41732,25 +41610,152 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var User = function () {
-	    function User(config) {
-	        _classCallCheck(this, User);
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-	        this.firstName = _lodash2.default.get(config, 'firstName', '');
-	        this.lastName = _lodash2.default.get(config, 'lastName', '');
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var HOME = 'home';
+	var AWAY = 'away';
+
+	var Linescore = function (_React$Component) {
+	    _inherits(Linescore, _React$Component);
+
+	    function Linescore(props) {
+	        _classCallCheck(this, Linescore);
+
+	        var _this = _possibleConstructorReturn(this, (Linescore.__proto__ || Object.getPrototypeOf(Linescore)).call(this, props));
+
+	        _this.state = {
+	            linescore: props.linescore,
+	            homeTeamName: props.homeTeamName,
+	            awayTeamName: props.awayTeamName
+	        };
+	        return _this;
 	    }
 
-	    _createClass(User, [{
-	        key: 'formatName',
-	        value: function formatName() {
-	            return this.firstName + ' ' + this.lastName;
+	    _createClass(Linescore, [{
+	        key: 'getTableHeder',
+	        value: function getTableHeder() {
+
+	            var inningLabel = 0;
+	            return this.state.linescore.inning.map(function (inning) {
+	                inningLabel++;
+	                return _react2.default.createElement(
+	                    'th',
+	                    { key: inningLabel, className: 'boxscore-inning' },
+	                    inningLabel
+	                );
+	            });
+	        }
+	    }, {
+	        key: 'getLinescoreRow',
+	        value: function getLinescoreRow(side) {
+	            var inningKey = 0;
+	            return this.state.linescore.inning.map(function (inning) {
+	                return _react2.default.createElement(
+	                    'td',
+	                    { key: inningKey++, className: 'inning-' + side },
+	                    inning[side]
+	                );
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+
+	            var linescore = this.state.linescore;
+
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'linescore' },
+	                _react2.default.createElement(
+	                    'table',
+	                    null,
+	                    _react2.default.createElement(
+	                        'tbody',
+	                        null,
+	                        this.getTableHeder(),
+	                        _react2.default.createElement(
+	                            'th',
+	                            { className: 'boxscore-runs' },
+	                            'R'
+	                        ),
+	                        _react2.default.createElement(
+	                            'th',
+	                            { className: 'boxscore-hits' },
+	                            'H'
+	                        ),
+	                        _react2.default.createElement(
+	                            'th',
+	                            { className: 'boxscore-errors' },
+	                            'E'
+	                        ),
+	                        _react2.default.createElement('th', { className: 'boxscore-scores' }),
+	                        _react2.default.createElement(
+	                            'tr',
+	                            { className: 'boxscore-home' },
+	                            this.getLinescoreRow(HOME),
+	                            _react2.default.createElement(
+	                                'td',
+	                                { className: 'boxscore-away-runs' },
+	                                this.state.linescore.r.home
+	                            ),
+	                            _react2.default.createElement(
+	                                'td',
+	                                { className: 'boxscore-away-hits' },
+	                                this.state.linescore.h.home
+	                            ),
+	                            _react2.default.createElement(
+	                                'td',
+	                                { className: 'boxscore-away-errors' },
+	                                this.state.linescore.e.home
+	                            ),
+	                            _react2.default.createElement(
+	                                'td',
+	                                { className: 'boxscore-home-score' },
+	                                this.state.awayTeamName,
+	                                ': ',
+	                                linescore.r.home
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            'tr',
+	                            { className: 'boxscore-away' },
+	                            this.getLinescoreRow(AWAY),
+	                            _react2.default.createElement(
+	                                'td',
+	                                { className: 'boxscore-away-runs' },
+	                                this.state.linescore.r.away
+	                            ),
+	                            _react2.default.createElement(
+	                                'td',
+	                                { className: 'boxscore-away-hits' },
+	                                this.state.linescore.h.away
+	                            ),
+	                            _react2.default.createElement(
+	                                'td',
+	                                { className: 'boxscore-away-errors' },
+	                                this.state.linescore.e.away
+	                            ),
+	                            _react2.default.createElement(
+	                                'td',
+	                                { className: 'boxscore-away-score' },
+	                                this.state.homeTeamName,
+	                                ': ',
+	                                linescore.r.away
+	                            )
+	                        )
+	                    )
+	                ),
+	                _react2.default.createElement('div', null)
+	            );
 	        }
 	    }]);
 
-	    return User;
-	}();
+	    return Linescore;
+	}(_react2.default.Component);
 
-	exports.default = User;
+	exports.default = Linescore;
 
 /***/ })
 /******/ ]);

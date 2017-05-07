@@ -2,6 +2,7 @@ import scoreboard from '../../src/server/scoreboard';
 //import expect from 'chai').expect;
 import _ from 'lodash';
 
+/** Jest tests */
 test('should load and return the scoreboard data', (done) => {
     var year = 2016;
     var month = 7;
@@ -26,7 +27,9 @@ test('should load and return the scoreboard data', (done) => {
     });
 });
 
-/* Mocha tests
+
+/** Mocha tests **/
+/*
 describe('Schedule', function() {
 
     describe('loadSchedule', function() {
